@@ -1,4 +1,6 @@
 import 'package:first/question.dart';
+import 'package:first/quiz.dart';
+import 'package:first/result.dart';
 import 'package:flutter/material.dart';
 
 import 'answer.dart';
@@ -19,19 +21,7 @@ class MyApp extends StatefulWidget {
 
 //Create a new class for the changing instance members and our code shifts here
 class _MyAppState extends State<MyApp> {
-  /* var _questionAnswers = [
-    {
-      "Your fav color ?": ["Black", "Blue", "Green"]
-    },
-    {
-      "Your fav movie ?": ["Godfather", "Interstellar", "Hulchul"]
-    },
-    {
-      "Your fav programming language": ["Java", "JavaScript", "C++"]
-    }
-  ]; */
-
-  var _questionAnswers = {
+  final _questionAnswers = {
     "Your fav color ?": ["Black", "Blue", "Green"],
     "Your fav movie ?": ["Godfather", "Interstellar", "Hulchul"],
     "Your fav programming language": ["Java", "JavaScript", "C++"]
@@ -52,15 +42,14 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(title: Text("First App")),
         //If we want to show data vertically
-        body: Column(
-          children: [
-            //Question is our custom widget, whose constructor take String
-            Question(_questionAnswers.keys.elementAt(_index)),
-            ...(_questionAnswers.values.elementAt(_index))
-                .toList()
-                .map((e) => Answer(_answerQuestion, e))
-          ],
-        ),
+        //Here we are using ternary operator to display a widget conditionally
+        body: _index < _questionAnswers.length
+            ? Quiz(
+                questionAnswers: _questionAnswers,
+                index: _index,
+                answerQuestion: _answerQuestion,
+              )
+            : Result(),
       ),
     );
   }
