@@ -12,7 +12,7 @@ class Answer extends StatelessWidget {
       width: double.infinity,
       child: RaisedButton(
         child: Text(answerText),
-        onPressed: functionReference,
+        onPressed: () => {functionReference(answerText)},
         color: Colors.blue,
       ),
     );

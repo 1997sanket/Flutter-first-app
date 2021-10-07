@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'answer.dart';
 
 class Quiz extends StatelessWidget {
-  final questionAnswers;
+  Map<String, Map<String, int>> questionAnswers;
   final Function answerQuestion;
   var index;
+
+  // List<String> options =
+  //     this.questionAnswers.values.
 
   Quiz({this.questionAnswers, this.index, this.answerQuestion});
 
@@ -20,6 +23,7 @@ class Quiz extends StatelessWidget {
             "..." is used to separate them and show on the screen 
              as children of Column widget */
         ...(questionAnswers.values.elementAt(index))
+            .keys
             .toList()
             .map((e) => Answer(answerQuestion, e))
       ],
